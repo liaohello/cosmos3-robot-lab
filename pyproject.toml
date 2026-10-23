@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cosmos3-robot-lab"
+version = "0.1.0"
+description = "Reproducible Cosmos3 robotics experiments and adapters"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+dependencies = ["PyYAML>=6.0,<7"]
+
+[project.scripts]
+cosmos3-robolab = "cosmos3_lab.runner:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

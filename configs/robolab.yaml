@@ -1,0 +1,20 @@
+# External paths are supplied by environment variables and never committed.
+external:
+  cosmos_lite_dir: "${COSMOS_LITE_DIR}"
+  robolab_dir: "${ROBOLAB_DIR}"
+  cosmos_python: "${COSMOS_QUANT_PYTHON}"
+  robolab_python: "${ROBOLAB_PYTHON}"
+  checkpoint_path: "${COSMOS_CHECKPOINT_PATH}"
+  deployment_config: "examples/robolab_quant/configs/edge_bf16.yaml"
+
+rollout:
+  task: BananaInBowlTask
+  num_envs: 1
+  num_runs: 1
+  policy_gpu: "0"
+  sim_gpu: "1"
+  video_mode: none
+  run_root: runs
+
+runtime:
+  offline_model_loading: true

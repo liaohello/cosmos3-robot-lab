@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "snapshot_date": "2026-10-23",
+  "upstream": {
+    "repository": "https://github.com/xxxxyu/cosmos-lite",
+    "package_version": "1.2.2",
+    "changelog_version": "0.3.0",
+    "git_revision": null,
+    "revision_note": "The available local snapshot has no Git metadata; its immutable upstream revision is unconfirmed."
+  },
+  "snapshot": {
+    "file_count": 958,
+    "total_bytes": 18524702,
+    "tree_sha256": "20129b45d894defc5cfa12616ee9ab8383d14451e57a67e934238357568a7ca9",
+    "retention": "External dependency; provide its local checkout through COSMOS_LITE_DIR. It is not vendored in this repository."
+  },
+  "excluded_from_this_repository": [
+    "upstream source trees",
+    "model weights and checkpoints",
+    "Python environments and package caches",
+    "raw datasets and simulator outputs",
+    "videos and run logs",
+    "hostnames, server paths, credentials, and personal account details"
+  ]
+}

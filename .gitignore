@@ -218,3 +218,32 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local credentials and host-specific settings
+.env
+.env.*
+!.env.example
+secrets*.yaml
+secrets*.yml
+*.pem
+*.key
+id_ed25519*
+id_rsa*
+
+# Model weights, datasets, simulator outputs, and experiment artifacts
+runs/
+outputs/
+artifacts/
+datasets/
+checkpoints/
+weights/
+data/raw/
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.h5
+*.hdf5
+*.mp4
+*.mkv
+*.log
