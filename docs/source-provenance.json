@@ -28,6 +28,13 @@
     ]
   },
   "license_note": "The source subtree retains its upstream OpenMDW-1.1 license and public contributor attribution. The repository root MIT license applies to the lab-owned integration code only.",
+  "robolab_dependency": {
+    "repository": "https://github.com/NVlabs/RoboLab",
+    "path": "external/RoboLab",
+    "release": "v0.3.1",
+    "git_revision": "9db0aaf09d9fe5d4f37b168320788258c7012463",
+    "delivery": "Pinned Git submodule; simulator assets use Git LFS and are fetched separately."
+  },
   "excluded_from_this_repository": [
     "model weights and checkpoints",
     "Python environments and package caches",

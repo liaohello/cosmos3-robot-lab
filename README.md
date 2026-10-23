@@ -4,9 +4,18 @@
 
 ## 仓库边界
 
-本仓库保存实验适配层和可复现材料，并将当前使用的 Cosmos Lite 源码快照隔离在 `sources/xxxxyu_cosmos-lite/`。该目录保留上游许可证与归属信息；本仓库的 MIT 许可不覆盖它。RoboLab、LeRobot、MuJoCo 等仍通过独立 checkout 或环境安装使用。模型权重、原始数据、运行日志和 Python 环境不进入 Git；仅保留一个约 200 KB 的低画质闭环视频证据。
+本仓库保存实验适配层和可复现材料，并将 Cosmos Lite 源码快照隔离在 `sources/xxxxyu_cosmos-lite/`。该目录保留上游许可证与归属信息；本仓库的 MIT 许可不覆盖它。RoboLab 以固定版本 Git 子模块放在 `external/RoboLab/`；LeRobot、MuJoCo 等其他依赖按阶段管理。模型权重、原始数据、运行日志和 Python 环境不进入 Git；仅保留一个约 200 KB 的低画质闭环视频证据。
 
-Cosmos Lite 来源与隔离副本校验摘要见 [`docs/source-provenance.json`](docs/source-provenance.json)；上游原始快照和本仓库脱敏副本分别有逐文件清单。运行时仍通过环境变量传入 RoboLab checkout、解释器和 checkpoint 位置。
+Cosmos Lite 来源与隔离副本校验摘要见 [`docs/source-provenance.json`](docs/source-provenance.json)；上游原始快照和本仓库脱敏副本分别有逐文件清单。RoboLab 子模块固定在集成补丁对应的 `v0.3.1` 提交。
+
+首次获取仓库后，在 Linux / WSL 中初始化 RoboLab 子模块、避免自动下载大型 LFS 资产，并应用阶段 A 补丁：
+
+```bash
+GIT_LFS_SKIP_SMUDGE=1 git submodule update --init --recursive
+python scripts/prepare_robolab.py
+```
+
+需要仿真资产时，再运行 `git -C external/RoboLab lfs pull`。
 
 ## 阶段
 
@@ -23,8 +32,10 @@ Cosmos Lite 来源与隔离副本校验摘要见 [`docs/source-provenance.json`]
 
 ```text
 configs/robolab.yaml          阶段 A 的无主机路径配置
+external/RoboLab/             固定版本的 RoboLab 子模块
 integrations/robolab/         对 RoboLab 的版本化集成补丁
 scripts/run_robolab.py        阶段 A 启动入口
+scripts/prepare_robolab.py    应用 RoboLab 集成补丁
 src/cosmos3_lab/              实验仓库的轻量适配代码
 docs/A_baseline.md            基线条件、结果与复现限制
 docs/A_environment.md         脱敏后的环境与运行摘要
@@ -40,13 +51,12 @@ sources/xxxxyu_cosmos-lite/   隔离后的 Cosmos Lite 源码快照
 python -m pip install -e .
 ```
 
-从干净的 RoboLab `v0.3.1` checkout 开始时，先按 [`integrations/robolab/README.md`](integrations/robolab/README.md) 应用第一个录制补丁；阶段 A 不需要应用 DROID 数据导出补丁。
+RoboLab 子模块已固定在补丁支持的 `v0.3.1` 基线。准备阶段 A 时运行 `python scripts/prepare_robolab.py`；第二个 DROID 数据导出补丁留给后续数据阶段。
 
 设置外部资源路径后启动单次基线：
 
 ```bash
 export COSMOS_LITE_DIR="$(pwd)/sources/xxxxyu_cosmos-lite"
-export ROBOLAB_DIR=/path/to/RoboLab
 export COSMOS_QUANT_PYTHON=/path/to/cosmos-runtime/bin/python
 export ROBOLAB_PYTHON=/path/to/robolab/isaac_python.sh
 export COSMOS_CHECKPOINT_PATH=/path/to/Cosmos3-Edge-Policy-DROID

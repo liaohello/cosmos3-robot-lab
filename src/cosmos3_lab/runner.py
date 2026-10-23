@@ -93,7 +93,12 @@ def run(config_path: Path) -> int:
         raise ConfigurationError("Config 'runtime' must be a mapping")
 
     cosmos_root = _path(external.get("cosmos_lite_dir"), "external.cosmos_lite_dir")
-    robolab_root = _path(external.get("robolab_dir"), "external.robolab_dir")
+    robolab_value = os.environ.get("ROBOLAB_DIR") or external.get("robolab_dir")
+    robolab_root = _path(
+        robolab_value,
+        "external.robolab_dir",
+        relative_to=REPO_ROOT,
+    )
     cosmos_python = _path(external.get("cosmos_python"), "external.cosmos_python")
     robolab_python = _path(external.get("robolab_python"), "external.robolab_python")
     checkpoint = _path(external.get("checkpoint_path"), "external.checkpoint_path")

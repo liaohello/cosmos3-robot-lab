@@ -10,13 +10,16 @@ This directory stores focused patches for an external RoboLab checkout. It does 
 - Repository: [NVlabs/RoboLab](https://github.com/NVlabs/RoboLab)
 - Release: `v0.3.1`
 - Base commit: `9db0aaf`
+- The source is included as the `external/RoboLab` Git submodule at this commit.
 - Apply in order:
   1. `patches/0001-bounded-cpu-streaming-image-recorder.patch`
   2. `patches/0002-Add-training-ready-Cosmos-DROID-trajectory-export.patch`
 
 The patches were carried from the Cosmos Lite integration snapshot and are distributed under the upstream `OpenMDW-1.1` terms. The patch author attribution is retained; the source email address was removed from the patch metadata. The full license text is in [`LICENSE-OpenMDW-1.1.txt`](LICENSE-OpenMDW-1.1.txt).
 
-Apply only to a clean checkout at the pinned base. The stage A runner does not apply patches automatically:
+The stage A patch is prepared with `python scripts/prepare_robolab.py`. Add `--trajectory-export` when preparing the later LeRobot data stage. The script verifies the submodule commit and can be run again after the patch is already applied.
+
+For a separate clean checkout at the pinned base, manual application is also supported:
 
 ```bash
 git -C "$ROBOLAB_DIR" switch --detach 9db0aaf

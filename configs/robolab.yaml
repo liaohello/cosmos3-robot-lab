@@ -1,7 +1,7 @@
 # External paths are supplied by environment variables and never committed.
 external:
   cosmos_lite_dir: "${COSMOS_LITE_DIR}"
-  robolab_dir: "${ROBOLAB_DIR}"
+  robolab_dir: external/RoboLab
   cosmos_python: "${COSMOS_QUANT_PYTHON}"
   robolab_python: "${ROBOLAB_PYTHON}"
   checkpoint_path: "${COSMOS_CHECKPOINT_PATH}"
