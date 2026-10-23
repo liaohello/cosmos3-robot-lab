@@ -4,9 +4,9 @@
 
 ## 仓库边界
 
-本仓库保存实验适配层和可复现材料。Cosmos Lite、RoboLab、LeRobot、MuJoCo 等上游项目通过独立 checkout 或环境安装使用，不把它们的完整源码复制进来。模型权重、原始数据、视频、运行日志和 Python 环境也不进入 Git。
+本仓库保存实验适配层和可复现材料，并将当前使用的 Cosmos Lite 源码快照隔离在 `sources/xxxxyu_cosmos-lite/`。该目录保留上游许可证与归属信息；本仓库的 MIT 许可不覆盖它。RoboLab、LeRobot、MuJoCo 等仍通过独立 checkout 或环境安装使用。模型权重、原始数据、运行日志和 Python 环境不进入 Git；仅保留一个约 200 KB 的低画质闭环视频证据。
 
-本机 Cosmos Lite 快照的来源摘要见 [`docs/source-provenance.json`](docs/source-provenance.json)，逐文件清单见 [`docs/cosmos-lite-source-manifest.sha256`](docs/cosmos-lite-source-manifest.sha256)。清单只用于校验外部源码快照，不代表本仓库包含上游源码。运行时通过环境变量传入外部源码、RoboLab checkout、解释器和 checkpoint 位置。
+Cosmos Lite 来源与隔离副本校验摘要见 [`docs/source-provenance.json`](docs/source-provenance.json)；上游原始快照和本仓库脱敏副本分别有逐文件清单。运行时仍通过环境变量传入 RoboLab checkout、解释器和 checkpoint 位置。
 
 ## 阶段
 
@@ -27,7 +27,9 @@ integrations/robolab/         对 RoboLab 的版本化集成补丁
 scripts/run_robolab.py        阶段 A 启动入口
 src/cosmos3_lab/              实验仓库的轻量适配代码
 docs/A_baseline.md            基线条件、结果与复现限制
-docs/source-provenance.json   外部 Cosmos Lite 快照的来源摘要
+docs/A_environment.md         脱敏后的环境与运行摘要
+docs/source-provenance.json   Cosmos Lite 来源和副本校验摘要
+sources/xxxxyu_cosmos-lite/   隔离后的 Cosmos Lite 源码快照
 ```
 
 ## 阶段 A：RoboLab + DROID
@@ -43,7 +45,7 @@ python -m pip install -e .
 设置外部资源路径后启动单次基线：
 
 ```bash
-export COSMOS_LITE_DIR=/path/to/cosmos-lite
+export COSMOS_LITE_DIR="$(pwd)/sources/xxxxyu_cosmos-lite"
 export ROBOLAB_DIR=/path/to/RoboLab
 export COSMOS_QUANT_PYTHON=/path/to/cosmos-runtime/bin/python
 export ROBOLAB_PYTHON=/path/to/robolab/isaac_python.sh

@@ -220,6 +220,7 @@ __marimo__/
 .streamlit/secrets.toml
 
 # Local credentials and host-specific settings
+.workbuddy/
 .env
 .env.*
 !.env.example
@@ -231,6 +232,8 @@ id_ed25519*
 id_rsa*
 
 # Model weights, datasets, simulator outputs, and experiment artifacts
+/sources/*
+!/sources/xxxxyu_cosmos-lite/
 runs/
 outputs/
 artifacts/
@@ -245,5 +248,7 @@ data/raw/
 *.h5
 *.hdf5
 *.mp4
+!docs/deployment-evidence/
+!docs/deployment-evidence/cosmos3-edge-banana-low.mp4
 *.mkv
 *.log
